@@ -509,23 +509,72 @@
     }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-    .accessibility-panel { margin: 20px 0 26px; padding: 16px; border: 1px solid #dadce0; border-radius: 12px; background: #fff; }
-    .accessibility-toggle, .accessibility-option {
+    @font-face {
+      font-family: "Lexend";
+      src: url("Lexend-Regular.ttf") format("truetype");
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+    }
+    .accessibility-launcher { position: fixed; right: 16px; bottom: 16px; z-index: 20; }
+    .accessibility-toggle {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #b8c4d6;
+      border-radius: 50%;
+      background: #fff;
+      color: #174ea6;
+      box-shadow: 0 2px 10px #20212430;
+      cursor: pointer;
+      font-size: 23px;
+    }
+    .accessibility-toggle:hover { background: #eef4fd; }
+    .accessibility-panel {
+      position: absolute;
+      right: 0;
+      bottom: 58px;
+      width: min(370px, calc(100vw - 32px));
+      max-height: min(76vh, 680px);
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding: 18px;
+      border: 1px solid #b8c4d6;
+      border-radius: 14px;
+      background: #fff;
+      color: #202124;
+      box-shadow: 0 8px 32px #20212430;
+    }
+    .accessibility-panel[hidden] { display: none; }
+    .accessibility-panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .accessibility-panel-header h2 { margin: 0; font-size: 18px; }
+    .accessibility-panel-header p { margin: 5px 0 0; color: #5f6368; font-size: 12px; line-height: 1.5; }
+    .accessibility-close, .accessibility-reset, .accessibility-option, .text-size-control {
       min-height: 40px;
-      padding: 8px 14px;
+      padding: 8px 12px;
       border: 1px solid #c4c7cc;
       border-radius: 8px;
       background: #fff;
       color: #202124;
       cursor: pointer;
-      font-size: 14px;
+      font: inherit;
+      font-size: 13px;
       font-weight: 600;
     }
-    .accessibility-options { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 12px; }
-    .accessibility-option[aria-pressed="true"] { border-color: #174ea6; background: #e8f0fe; color: #174ea6; }
-    .accessibility-status { min-height: 1.5em; margin: 10px 0 0; color: #3c4043; font-size: 13px; line-height: 1.5; }
+    .accessibility-close { width: 40px; padding: 0; font-size: 20px; }
+    .accessibility-group { margin: 0; padding: 12px 0; border: 0; border-top: 1px solid #e5e8ed; }
+    .accessibility-group legend { padding: 0 8px 0 0; color: #3c4043; font-size: 13px; font-weight: 700; }
+    .accessibility-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+    .accessibility-option[aria-pressed="true"], .text-size-control[aria-pressed="true"] { border-color: #174ea6; background: #e8f0fe; color: #174ea6; }
+    .text-size-control { min-width: 48px; font-size: 16px; }
+    .accessibility-reset { margin-top: 12px; }
+    .accessibility-status { min-height: 1.5em; margin: 12px 0 0; color: #3c4043; font-size: 12px; line-height: 1.5; }
     .accessibility-status:empty { display: none; }
-    body.large-text :is(.home-intro p, .scenario-card h2, .scenario-card p, .scenario-hook, .scenario-start, .scenario-heading, .stats-header h2, .stats-header p, .stats-total, .audience-metric-label, .audience-metric-value, .stats-storage-note, .home-footnote, .folder, .view-title, .mail-counter, .mail-row, .detail-subject, .sender-name, .sender-address, .recipient-line, .sender-date, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .primary-button, .secondary-button) { font-size: 1.18em; }
+    body.dyslexia-font, body.dyslexia-font :is(button, input, select, textarea) { font-family: "Lexend", Verdana, sans-serif; }
+    body.spacious-text :is(p, li, .scenario-card h2, .scenario-card p, .scenario-hook, .detail-subject, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .coach-message h1, .coach-message .coach-body) { line-height: 1.9 !important; letter-spacing: .035em !important; word-spacing: .08em !important; }
+    body[data-text-scale="small"] :is(.home-intro h1, .home-intro p, .scenario-card h2, .scenario-card p, .scenario-hook, .scenario-start, .scenario-heading, .stats-header h2, .stats-header p, .stats-total, .audience-metric-label, .audience-metric-value, .stats-storage-note, .home-footnote, .folder, .view-title, .mail-counter, .mail-row, .detail-subject, .sender-name, .sender-address, .recipient-line, .sender-date, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .primary-button, .secondary-button) { font-size: .92em; }
+    body[data-text-scale="large"] :is(.home-intro h1, .home-intro p, .scenario-card h2, .scenario-card p, .scenario-hook, .scenario-start, .scenario-heading, .stats-header h2, .stats-header p, .stats-total, .audience-metric-label, .audience-metric-value, .stats-storage-note, .home-footnote, .folder, .view-title, .mail-counter, .mail-row, .detail-subject, .sender-name, .sender-address, .recipient-line, .sender-date, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .primary-button, .secondary-button) { font-size: 1.2em; }
     body.high-contrast {
       --page: #fff;
       --surface: #fff;
@@ -541,8 +590,51 @@
       --green: #005c1a;
       --green-soft: #d8f5df;
     }
-    body.high-contrast :is(button, a, input, .scenario-card, .stats-panel, .main-area, .accessibility-panel) { border-color: #333; }
-    body.high-contrast :is(button, a, input):focus-visible { outline: 3px solid #000; outline-offset: 3px; }
+    body.cream-mode {
+      --page: #f6f0df;
+      --surface: #fffaf0;
+      --surface-hover: #eee5d2;
+      --surface-selected: #e7dcc2;
+      --ink: #28251f;
+      --muted: #49443b;
+      --line: #b8ad99;
+      --blue: #244d75;
+      --blue-soft: #e1e8ed;
+      --red: #87352b;
+      --red-soft: #f2dfd8;
+      --green: #285d3b;
+      --green-soft: #dce9d9;
+    }
+    body.high-contrast :is(button, a, input, .scenario-card, .stats-panel, .main-area, .accessibility-panel, .accessibility-toggle) { border-color: #333; }
+    body.high-contrast :is(.home-page, .app-layout, .app-header, .main-area, .sidebar, .stats-panel, .scenario-card, .accessibility-panel, .accessibility-toggle, .mail-row, .chart-track, .feedback, .golden-rules, .official-card, .document-card, .promo-card) { background-color: #fff; color: #000; }
+    body.high-contrast :is(p, li, h1, h2, h3, h4, span, time, strong, small, label, .chart-action, .search-caption, .search-result p, .stats-storage-note, .sender-address, .recipient-line, .sender-date, .view-title, .mail-counter, .scenario-audience, .scenario-hook, .accessibility-panel-header p) { color: #000 !important; }
+    body.high-contrast :is(.scenario-start, .search-result h2, .search-result a, .link-inspector-toggle, .domain-toggle, .speech-button) { color: #003b9e !important; text-decoration: underline; }
+    body.high-contrast :is(.fake-link, .primary-button) { background: #000 !important; color: #fff !important; }
+    body.high-contrast .promo-card { background: #000 !important; color: #fff !important; }
+    body.high-contrast .promo-card :is(p, span, strong) { color: #fff !important; }
+    body.high-contrast .ending-icon { border: 2px solid currentColor; }
+    body.high-contrast :is(button, a, input, .scenario-start, .search-result h2, .search-result a):focus-visible { outline: 3px solid #000; outline-offset: 3px; }
+    body.cream-mode :is(.home-page, .app-layout, .app-header, .main-area, .sidebar, .stats-panel, .scenario-card, .accessibility-panel, .accessibility-toggle, .mail-row, .chart-track, .feedback, .golden-rules, .official-card, .document-card) { color: var(--ink); }
+    body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    body.large-targets :is(button, a, input, select, textarea, [tabindex]):not([tabindex="-1"]) { min-width: 48px; min-height: 48px; }
+    body.large-targets :is(.icon-button, .row-control, .folder, .scenario-start, .fake-link, .primary-button, .secondary-button, .mail-tab) { padding: 10px 14px; }
+    body.keyboard-navigation :focus { outline: 3px solid #ffbf47 !important; outline-offset: 3px !important; box-shadow: 0 0 0 2px #111 !important; }
+    .reading-ruler {
+      position: fixed;
+      right: 0;
+      left: 0;
+      z-index: 30;
+      height: 44px;
+      border-top: 2px solid #b8860b;
+      border-bottom: 2px solid #b8860b;
+      background: #fff4a3aa;
+      box-shadow: 0 0 0 100vmax #0004;
+      pointer-events: none;
+      touch-action: none;
+    }
+    .speech-button { min-width: 40px; min-height: 40px; margin: 2px 0 6px 8px; padding: 6px 10px; border: 1px solid #c4c7cc; border-radius: 999px; background: #fff; color: #174ea6; cursor: pointer; font-size: 14px; vertical-align: middle; }
+    .speech-button:hover { background: #eef4fd; }
+    body.large-targets .speech-button { min-width: 48px; min-height: 48px; }
     .link-inspector { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -10px 0 18px; }
     .link-inspector-toggle, .domain-toggle { min-height: 36px; padding: 6px 10px; border: 1px solid #a8c7fa; border-radius: 7px; background: #f4f8fd; color: #174ea6; cursor: pointer; font-size: 12px; font-weight: 700; }
     .link-inspector-details, .domain-details { flex-basis: 100%; margin: 0; padding: 10px 12px; border-left: 3px solid #f9ab00; border-radius: 4px; background: #fff8e1; color: #3c4043; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
@@ -700,15 +792,6 @@
         <button class="scenario-start" type="button" data-scenario="work">Découvrir le scénario <span aria-hidden="true">→</span></button>
       </article>
     </section>
-    <section class="accessibility-panel" aria-label="Options d’accessibilité">
-      <button class="accessibility-toggle" id="accessibility-toggle" type="button" aria-expanded="false" aria-controls="accessibility-options">Options d’accessibilité</button>
-      <div class="accessibility-options" id="accessibility-options" hidden>
-        <button class="accessibility-option" id="large-text-toggle" type="button" aria-pressed="false">Agrandir le texte</button>
-        <button class="accessibility-option" id="contrast-toggle" type="button" aria-pressed="false">Fort contraste</button>
-        <button class="accessibility-option" id="read-instructions" type="button" aria-pressed="false">Lire les consignes</button>
-      </div>
-      <p class="accessibility-status" id="accessibility-status" role="status" aria-live="polite"></p>
-    </section>
     <section class="stats-panel" aria-labelledby="stats-title">
       <header class="stats-header">
         <div>
@@ -783,6 +866,47 @@
     </section>
   </div>
   <div id="toast-region" aria-live="polite"></div>
+  <div class="accessibility-launcher">
+    <section class="accessibility-panel" id="accessibility-panel" role="region" aria-labelledby="accessibility-title" hidden>
+      <header class="accessibility-panel-header">
+        <div>
+          <h2 id="accessibility-title">Options d’accessibilité</h2>
+          <p>Les réglages sont enregistrés sur cet appareil.</p>
+        </div>
+        <button class="accessibility-close" id="accessibility-close" type="button" aria-label="Fermer les options d’accessibilité">×</button>
+      </header>
+      <fieldset class="accessibility-group">
+        <legend>Lecture et concentration</legend>
+        <div class="accessibility-controls">
+          <button class="accessibility-option" type="button" data-a11y-toggle="dyslexia" aria-pressed="false">Police Lexend</button>
+          <button class="accessibility-option" type="button" data-a11y-toggle="spacing" aria-pressed="false">Aération du texte</button>
+          <button class="accessibility-option" type="button" data-a11y-toggle="ruler" aria-pressed="false">Règle de lecture</button>
+        </div>
+      </fieldset>
+      <fieldset class="accessibility-group">
+        <legend>Affichage</legend>
+        <div class="accessibility-controls">
+          <button class="text-size-control" type="button" data-text-size="small" aria-label="Réduire le texte" aria-pressed="false">A−</button>
+          <button class="text-size-control" type="button" data-text-size="normal" aria-label="Taille de texte normale" aria-pressed="true">A</button>
+          <button class="text-size-control" type="button" data-text-size="large" aria-label="Agrandir le texte" aria-pressed="false">A+</button>
+          <button class="accessibility-option" type="button" data-a11y-contrast="high" aria-pressed="false">Haut contraste</button>
+          <button class="accessibility-option" type="button" data-a11y-contrast="cream" aria-pressed="false">Fond crème</button>
+          <button class="accessibility-option" type="button" data-a11y-toggle="motion" aria-pressed="false">Masquer les animations</button>
+        </div>
+      </fieldset>
+      <fieldset class="accessibility-group">
+        <legend>Audio et interactions</legend>
+        <div class="accessibility-controls">
+          <button class="accessibility-option" type="button" data-a11y-toggle="speech" aria-pressed="false">Lecture vocale</button>
+          <button class="accessibility-option" type="button" data-a11y-toggle="targets" aria-pressed="false">Cibles élargies</button>
+        </div>
+      </fieldset>
+      <button class="accessibility-reset" id="accessibility-reset" type="button">Réinitialiser les préférences</button>
+      <p class="accessibility-status" id="accessibility-status" role="status" aria-live="polite"></p>
+    </section>
+    <button class="accessibility-toggle" id="accessibility-toggle" type="button" aria-label="Ouvrir les options d’accessibilité" aria-expanded="false" aria-controls="accessibility-panel" title="Options d’accessibilité">♿</button>
+  </div>
+  <div class="reading-ruler" id="reading-ruler" aria-hidden="true" hidden></div>
 
   <script src="script.js"></script>
   <script src="enhancements.js"></script>
