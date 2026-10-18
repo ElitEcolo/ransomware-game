@@ -67,7 +67,7 @@
     }
     .search-wrap:focus-within { background: var(--surface); box-shadow: 0 1px 3px #20212435, 0 0 0 1px #dadce0; }
     .search-wrap svg { width: 21px; height: 21px; flex: none; }
-    .search-wrap input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 16px; }
+    .search-wrap input { width: 100%; border: 0; background: transparent; color: var(--ink); font-size: 16px; }
     .search-wrap input::placeholder { color: #5f6368; opacity: 1; }
     .header-actions { display: flex; align-items: center; gap: 12px; }
 
@@ -133,7 +133,7 @@
       transition: transform .16s, box-shadow .16s, border-color .16s;
     }
     .scenario-card:hover { border-color: #a8c7fa; box-shadow: 0 5px 18px #20212416; }
-    .scenario-card:focus-visible { outline: 3px solid #1a73e8; outline-offset: 3px; }
+    .scenario-card:focus-visible { outline: 3px solid #003b9e; outline-offset: 3px; }
     .scenario-icon {
       width: 48px;
       height: 48px;
@@ -173,7 +173,7 @@
     .chart-profile { display: grid; grid-template-columns: 180px minmax(0, 1fr); align-items: center; gap: 18px; }
     .chart-profile-label strong, .chart-profile-label span { display: block; }
     .chart-profile-label strong { color: #3c4043; font-size: 13px; }
-    .chart-profile-label span { margin-top: 4px; color: #80868b; font-size: 11px; }
+    .chart-profile-label span { margin-top: 4px; color: #5f6368; font-size: 11px; }
     .chart-bars { display: grid; gap: 7px; }
     .chart-bar-row { display: grid; grid-template-columns: 116px minmax(50px, 1fr) 34px; align-items: center; gap: 9px; }
     .chart-action { color: #5f6368; font-size: 11px; }
@@ -182,9 +182,9 @@
     .chart-bar.deleted { background: #d93025; }
     .chart-bar.verified { background: #188038; }
     .chart-value { color: #3c4043; font-size: 12px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
-    .stats-storage-note { min-height: 18px; margin: 16px 0 0; color: #6f7782; font-size: 11px; line-height: 1.5; }
+    .stats-storage-note { min-height: 18px; margin: 16px 0 0; color: #5f6368; font-size: 11px; line-height: 1.5; }
     .stats-storage-note.error { color: #b3261e; }
-    .home-footnote { max-width: 760px; margin: 22px auto 0; color: #6f7782; font-size: 12px; line-height: 1.55; text-align: center; }
+    .home-footnote { max-width: 760px; margin: 22px auto 0; color: #5f6368; font-size: 12px; line-height: 1.55; text-align: center; }
     .home-button { width: auto; gap: 8px; padding: 0 12px; border-radius: 20px; font-size: 12px; }
     .home-button svg { width: 17px; height: 17px; }
 
@@ -312,11 +312,11 @@
       cursor: pointer;
       text-align: left;
     }
-    .row-open:focus-visible { outline: 2px solid #1a73e8; outline-offset: 2px; }
+    .row-open:focus-visible { outline: 3px solid #003b9e; outline-offset: 3px; }
     .row-sender, .row-subject, .row-preview { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .row-message { min-width: 0; display: flex; }
     .row-subject { flex: none; max-width: 48%; }
-    .row-preview { min-width: 0; margin-left: 5px; color: #777; }
+    .row-preview { min-width: 0; margin-left: 5px; color: #5f6368; }
     .row-preview::before { content: "— "; }
     .row-time { padding-left: 10px; font-size: 12px; white-space: nowrap; }
     .spam-chip {
@@ -397,7 +397,7 @@
       place-items: center;
       border-radius: 50%;
       background: #e8f0fe;
-      color: #1a73e8;
+      color: #174ea6;
       font-size: 22px;
       font-weight: 700;
     }
@@ -419,12 +419,13 @@
     }
     .fake-link-purple { background: #5865f2; }
     .fake-link-work { background: #185abd; }
+    /* Light promo copy keeps at least 4.5:1 contrast against both gradient endpoints. */
     .promo-card {
       max-width: 490px;
       margin-bottom: 20px;
       padding: 22px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #32205f, #5865f2);
+      background: linear-gradient(135deg, #32205f, #4752c4);
       color: white;
       text-align: center;
     }
@@ -493,7 +494,8 @@
     .primary-button:hover { background: #0842a0; box-shadow: 0 1px 3px #00000025; }
     .secondary-button { border: 1px solid #dadce0; background: white; color: #3c4043; }
     .secondary-button:hover { background: #f5f7f7; }
-    .focusable:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #1a73e8; outline-offset: 2px; }
+    /* WCAG 2.4.7: retain a high-contrast, offset focus indicator for keyboard users. */
+    :is(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 3px solid #003b9e; outline-offset: 3px; }
     .toast {
       position: fixed;
       bottom: 24px;
@@ -510,10 +512,17 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
     @font-face {
-      font-family: "Lexend";
-      src: url("Lexend-Regular.ttf") format("truetype");
+      font-family: "OpenDyslexic";
+      src: url("OpenDyslexic-Regular.woff2") format("woff2");
       font-style: normal;
       font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "OpenDyslexic";
+      src: url("OpenDyslexic-Bold.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
       font-display: swap;
     }
     .accessibility-launcher { position: fixed; right: 16px; bottom: 16px; z-index: 20; }
@@ -571,7 +580,7 @@
     .accessibility-reset { margin-top: 12px; }
     .accessibility-status { min-height: 1.5em; margin: 12px 0 0; color: #3c4043; font-size: 12px; line-height: 1.5; }
     .accessibility-status:empty { display: none; }
-    body.dyslexia-font, body.dyslexia-font :is(button, input, select, textarea) { font-family: "Lexend", Verdana, sans-serif; }
+    body.dyslexia-font, body.dyslexia-font :is(button, input, select, textarea) { font-family: "OpenDyslexic", Verdana, sans-serif; }
     body.spacious-text :is(p, li, .scenario-card h2, .scenario-card p, .scenario-hook, .detail-subject, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .coach-message h1, .coach-message .coach-body) { line-height: 1.9 !important; letter-spacing: .035em !important; word-spacing: .08em !important; }
     body[data-text-scale="small"] :is(.home-intro h1, .home-intro p, .scenario-card h2, .scenario-card p, .scenario-hook, .scenario-start, .scenario-heading, .stats-header h2, .stats-header p, .stats-total, .audience-metric-label, .audience-metric-value, .stats-storage-note, .home-footnote, .folder, .view-title, .mail-counter, .mail-row, .detail-subject, .sender-name, .sender-address, .recipient-line, .sender-date, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .primary-button, .secondary-button) { font-size: .92em; }
     body[data-text-scale="large"] :is(.home-intro h1, .home-intro p, .scenario-card h2, .scenario-card p, .scenario-hook, .scenario-start, .scenario-heading, .stats-header h2, .stats-header p, .stats-total, .audience-metric-label, .audience-metric-value, .stats-storage-note, .home-footnote, .folder, .view-title, .mail-counter, .mail-row, .detail-subject, .sender-name, .sender-address, .recipient-line, .sender-date, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .primary-button, .secondary-button) { font-size: 1.2em; }
@@ -610,6 +619,7 @@
     body.high-contrast :is(p, li, h1, h2, h3, h4, span, time, strong, small, label, .chart-action, .search-caption, .search-result p, .stats-storage-note, .sender-address, .recipient-line, .sender-date, .view-title, .mail-counter, .scenario-audience, .scenario-hook, .accessibility-panel-header p) { color: #000 !important; }
     body.high-contrast :is(.scenario-start, .search-result h2, .search-result a, .link-inspector-toggle, .domain-toggle, .speech-button) { color: #003b9e !important; text-decoration: underline; }
     body.high-contrast :is(.fake-link, .primary-button) { background: #000 !important; color: #fff !important; }
+    body.high-contrast :is(.fake-link, .primary-button) :is(span, svg) { color: #fff !important; }
     body.high-contrast .promo-card { background: #000 !important; color: #fff !important; }
     body.high-contrast .promo-card :is(p, span, strong) { color: #fff !important; }
     body.high-contrast .ending-icon { border: 2px solid currentColor; }
@@ -619,6 +629,13 @@
     body.large-targets :is(button, a, input, select, textarea, [tabindex]):not([tabindex="-1"]) { min-width: 48px; min-height: 48px; }
     body.large-targets :is(.icon-button, .row-control, .folder, .scenario-start, .fake-link, .primary-button, .secondary-button, .mail-tab) { padding: 10px 14px; }
     body.keyboard-navigation :focus { outline: 3px solid #ffbf47 !important; outline-offset: 3px !important; box-shadow: 0 0 0 2px #111 !important; }
+    .keyboard-shortcut-help { margin: 10px 0 0; padding: 10px; border-radius: 7px; background: #f4f8fd; color: #3c4043; font-size: 12px; line-height: 1.6; }
+    .fal-help { margin: 10px 0 0; padding: 10px; border-left: 3px solid #174ea6; background: #f4f8fd; color: #3c4043; font-size: 12px; line-height: 1.6; }
+    .falc-description { margin: 0 0 6px; color: #3c4043; font-size: 13px; font-weight: 700; }
+    .falc-list { margin: 0 0 16px; padding-left: 1.5em; color: inherit; }
+    .falc-list li { margin: 0 0 6px; line-height: 1.6; }
+    body.easy-read .scenario-card, body.easy-read .detail, body.easy-read .ending, body.easy-read .coach-message { line-height: 1.8; }
+    body.easy-read .scenario-card p, body.easy-read .detail-body p, body.easy-read .feedback p { max-width: 65ch; }
     .reading-ruler {
       position: fixed;
       right: 0;
@@ -635,6 +652,14 @@
     .speech-button { min-width: 40px; min-height: 40px; margin: 2px 0 6px 8px; padding: 6px 10px; border: 1px solid #c4c7cc; border-radius: 999px; background: #fff; color: #174ea6; cursor: pointer; font-size: 14px; vertical-align: middle; }
     .speech-button:hover { background: #eef4fd; }
     body.large-targets .speech-button { min-width: 48px; min-height: 48px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
     .link-inspector { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -10px 0 18px; }
     .link-inspector-toggle, .domain-toggle { min-height: 36px; padding: 6px 10px; border: 1px solid #a8c7fa; border-radius: 7px; background: #f4f8fd; color: #174ea6; cursor: pointer; font-size: 12px; font-weight: 700; }
     .link-inspector-details, .domain-details { flex-basis: 100%; margin: 0; padding: 10px 12px; border-left: 3px solid #f9ab00; border-radius: 4px; background: #fff8e1; color: #3c4043; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
@@ -755,7 +780,7 @@
     <div class="header-actions">
       <button class="icon-button" type="button" aria-label="Aide" title="Aide" data-toast="Aide de la simulation"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9.6 9a2.5 2.5 0 1 1 4.4 1.6c-1 1.1-2 1.2-2 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg></button>
       <button class="icon-button" type="button" aria-label="Paramètres" title="Paramètres" data-toast="Les paramètres ne sont pas disponibles dans cette simulation."><svg viewBox="0 0 24 24" fill="none"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" stroke="currentColor" stroke-width="1.8"/><path d="m19.4 13.5 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.7 1l-.3 1.5h-2.4l-.4-1.5a7.5 7.5 0 0 1-1.8-.7l-1.3.7-1.5-1.8.9-1.2a7 7 0 0 1-.4-1.9l-1.3-.7.5-2.3 1.5-.1a7.1 7.1 0 0 1 1.2-1.6l-.2-1.5 2.2-.9.9 1.2a7 7 0 0 1 1.9.1l1-1.1 2 1.3-.5 1.4a7.3 7.3 0 0 1 .9 1.7l1.5.4v2.4l-1.4.4a7 7 0 0 1-.8 1.2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
-      <div class="profile" id="profile-badge" aria-label="Profil de simulation" title="Profil de simulation">CA</div>
+      <div class="profile" id="profile-badge" role="status" aria-live="polite" aria-atomic="true" aria-label="Profil de simulation" title="Profil de simulation">CA</div>
     </div>
   </header>
 
@@ -800,7 +825,7 @@
         </div>
         <span class="stats-total" id="stats-total">0 actions</span>
       </header>
-      <div class="audience-metrics" aria-label="Statistiques de fréquentation">
+      <div class="audience-metrics" role="group" aria-label="Statistiques de fréquentation">
         <div class="audience-metric">
           <span class="audience-metric-label"><span aria-hidden="true"></span>Visites cumulées</span>
           <strong class="audience-metric-value" id="visit-total">—</strong>
@@ -812,12 +837,12 @@
       </div>
       <p class="stats-storage-note" id="audience-status" role="status" aria-live="polite">Chargement de la fréquentation…</p>
       <p class="stats-storage-note" id="stats-impact" role="status" aria-live="polite">Chaque choix alimentera les compteurs agrégés de l’atelier.</p>
-      <div class="chart-legend" aria-label="Légende du graphique">
+      <div class="chart-legend" role="group" aria-label="Légende du graphique">
         <span class="legend-item"><span class="legend-swatch"></span>Ouvrir le lien</span>
         <span class="legend-item"><span class="legend-swatch deleted"></span>Supprimer le message</span>
         <span class="legend-item"><span class="legend-swatch verified"></span>Rechercher le service officiel</span>
       </div>
-      <div class="stats-chart" id="stats-chart" role="img" aria-label="Graphique des actions anonymes par profil"></div>
+      <div class="stats-chart" id="stats-chart" role="region" aria-label="Graphique des actions anonymes par profil"></div>
       <p class="stats-storage-note" id="stats-storage-note" role="status" aria-live="polite">Connexion aux statistiques partagées…</p>
     </section>
     <p class="home-footnote">Les expéditeurs et messages sont fictifs. Les compteurs enregistrent les chargements de page et les actions par profil, sans nom ni courriel. Un jeton aléatoire temporaire par onglet sert uniquement à estimer les sessions actives ; après 90 secondes d'inactivité, l'onglet n'est plus compté, et les sessions expirées sont nettoyées au prochain appel. Plusieurs onglets peuvent compter plusieurs fois. Ces chiffres ne représentent pas des personnes uniques. Le service d'hébergement peut traiter des données techniques de connexion selon sa propre politique. L'objectif est d'apprendre sans culpabiliser.</p>
@@ -854,18 +879,18 @@
           <button class="icon-button" type="button" aria-label="Signaler comme indésirable" title="Signaler comme indésirable" data-toast="Tu peux signaler l'incident à l'équipe informatique dans le scénario."><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 21 20H3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9v5m0 3h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
           <button class="icon-button" type="button" id="delete-button" aria-label="Supprimer" title="Supprimer"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
-        <span class="view-title" id="view-title">Boîte de réception</span>
-        <div class="mail-counter" id="mail-counter">1–3 sur 3</div>
+        <span class="view-title" id="view-title" aria-live="polite">Boîte de réception</span>
+        <div class="mail-counter" id="mail-counter" aria-live="polite">1–3 sur 3</div>
       </div>
       <div class="mail-tabs" id="mail-tabs" aria-label="Catégories de la boîte de réception">
-        <div class="mail-tab active"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4z" stroke="currentColor" stroke-width="1.7"/><path d="M4 13h4l2 3h4l2-3h4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Principale</div>
-        <div class="mail-tab"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16v12H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Réseaux sociaux</div>
-        <div class="mail-tab"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16v12H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Notifications</div>
+        <button class="mail-tab active" type="button" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v14H4z" stroke="currentColor" stroke-width="1.7"/><path d="M4 13h4l2 3h4l2-3h4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Principale</button>
+        <button class="mail-tab" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16v12H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Réseaux sociaux</button>
+        <button class="mail-tab" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16v12H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Notifications</button>
       </div>
-      <div id="game-content" aria-live="polite" aria-atomic="true"></div>
+      <div id="game-content" aria-live="polite" aria-atomic="false"></div>
     </section>
   </div>
-  <div id="toast-region" aria-live="polite"></div>
+  <div id="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
   <div class="accessibility-launcher">
     <section class="accessibility-panel" id="accessibility-panel" role="region" aria-labelledby="accessibility-title" hidden>
       <header class="accessibility-panel-header">
@@ -878,10 +903,12 @@
       <fieldset class="accessibility-group">
         <legend>Lecture et concentration</legend>
         <div class="accessibility-controls">
-          <button class="accessibility-option" type="button" data-a11y-toggle="dyslexia" aria-pressed="false">Police Lexend</button>
+          <button class="accessibility-option" type="button" data-a11y-toggle="easyRead" aria-pressed="false" aria-describedby="falc-help">Aide de lecture simplifiée</button>
+          <button class="accessibility-option" type="button" data-a11y-toggle="dyslexia" aria-pressed="false">Police OpenDyslexic</button>
           <button class="accessibility-option" type="button" data-a11y-toggle="spacing" aria-pressed="false">Aération du texte</button>
           <button class="accessibility-option" type="button" data-a11y-toggle="ruler" aria-pressed="false">Règle de lecture</button>
         </div>
+        <p class="fal-help" id="falc-help">Aide de lecture simplifiée : certains textes sont présentés en points courts. Cette aide n’est pas une version FALC certifiée ni validée avec des personnes concernées.</p>
       </fieldset>
       <fieldset class="accessibility-group">
         <legend>Affichage</legend>
@@ -901,14 +928,31 @@
           <button class="accessibility-option" type="button" data-a11y-toggle="targets" aria-pressed="false">Cibles élargies</button>
         </div>
       </fieldset>
+      <fieldset class="accessibility-group">
+        <legend>Navigation au clavier avancée</legend>
+        <div class="accessibility-controls">
+          <button class="accessibility-option" type="button" data-a11y-toggle="keyboard" aria-pressed="false">Activer les raccourcis</button>
+        </div>
+        <p class="keyboard-shortcut-help" id="keyboard-shortcut-help" hidden>Raccourcis : Ctrl + Alt + Maj + 1 / 2 / 3 pour choisir un scénario ; Ctrl + Alt + Maj + A pour ouvrir ce panneau ; Ctrl + Alt + Maj + I pour revenir à la liste des profils. Ces raccourcis complètent la navigation au clavier habituelle et peuvent être interceptés par le navigateur ou un lecteur d’écran.</p>
+      </fieldset>
       <button class="accessibility-reset" id="accessibility-reset" type="button">Réinitialiser les préférences</button>
-      <p class="accessibility-status" id="accessibility-status" role="status" aria-live="polite"></p>
+      <p class="accessibility-status" id="accessibility-status"></p>
     </section>
     <button class="accessibility-toggle" id="accessibility-toggle" type="button" aria-label="Ouvrir les options d’accessibilité" aria-expanded="false" aria-controls="accessibility-panel" title="Options d’accessibilité">♿</button>
   </div>
   <div class="reading-ruler" id="reading-ruler" aria-hidden="true" hidden></div>
+  <div class="sr-only" id="a11y-live-status" role="status" aria-live="polite" aria-atomic="true"></div>
 
   <script src="script.js"></script>
+  <!--
+    Repères de maintenance pour l’audit (pas une déclaration de conformité) :
+    les boutons et liens natifs conservent leur rôle HTML ; aria-expanded, aria-pressed,
+    aria-controls et les noms accessibles sont réservés aux états ou commandes qui en ont besoin.
+    les messages dynamiques utilisent des régions live polies. Les contrastes relevés lors des
+    contrôles de la page d’accueil et de la liste de messages ont été corrigés selon WCAG 1.4.3 ;
+    les états générés par JavaScript
+    et les autres parcours doivent rester inclus dans tout audit RGAA/WCAG ultérieur.
+  -->
   <script src="enhancements.js"></script>
 </body>
 </html>
