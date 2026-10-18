@@ -509,6 +509,54 @@
     }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
+    .accessibility-panel { margin: 20px 0 26px; padding: 16px; border: 1px solid #dadce0; border-radius: 12px; background: #fff; }
+    .accessibility-toggle, .accessibility-option {
+      min-height: 40px;
+      padding: 8px 14px;
+      border: 1px solid #c4c7cc;
+      border-radius: 8px;
+      background: #fff;
+      color: #202124;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .accessibility-options { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 12px; }
+    .accessibility-option[aria-pressed="true"] { border-color: #174ea6; background: #e8f0fe; color: #174ea6; }
+    .accessibility-status { min-height: 1.5em; margin: 10px 0 0; color: #3c4043; font-size: 13px; line-height: 1.5; }
+    .accessibility-status:empty { display: none; }
+    body.large-text :is(.home-intro p, .scenario-card h2, .scenario-card p, .scenario-hook, .scenario-start, .scenario-heading, .stats-header h2, .stats-header p, .stats-total, .audience-metric-label, .audience-metric-value, .stats-storage-note, .home-footnote, .folder, .view-title, .mail-counter, .mail-row, .detail-subject, .sender-name, .sender-address, .recipient-line, .sender-date, .detail-body, .ending h3, .ending-header p, .feedback, .golden-rules li, .primary-button, .secondary-button) { font-size: 1.18em; }
+    body.high-contrast {
+      --page: #fff;
+      --surface: #fff;
+      --surface-hover: #eee;
+      --surface-selected: #d6e4ff;
+      --ink: #000;
+      --muted: #222;
+      --line: #555;
+      --blue: #003b9e;
+      --blue-soft: #d6e4ff;
+      --red: #9b0000;
+      --red-soft: #ffe0e0;
+      --green: #005c1a;
+      --green-soft: #d8f5df;
+    }
+    body.high-contrast :is(button, a, input, .scenario-card, .stats-panel, .main-area, .accessibility-panel) { border-color: #333; }
+    body.high-contrast :is(button, a, input):focus-visible { outline: 3px solid #000; outline-offset: 3px; }
+    .link-inspector { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -10px 0 18px; }
+    .link-inspector-toggle, .domain-toggle { min-height: 36px; padding: 6px 10px; border: 1px solid #a8c7fa; border-radius: 7px; background: #f4f8fd; color: #174ea6; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .link-inspector-details, .domain-details { flex-basis: 100%; margin: 0; padding: 10px 12px; border-left: 3px solid #f9ab00; border-radius: 4px; background: #fff8e1; color: #3c4043; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+    .link-inspector-details code, .domain-details code { font-size: 1em; font-weight: 700; overflow-wrap: anywhere; }
+    .sender-info { overflow-wrap: anywhere; }
+    .attachment-simulation { width: min(100%, 460px); display: flex; align-items: center; gap: 12px; margin: 20px 0; padding: 14px; border: 1px solid #dadce0; border-radius: 9px; background: #fff; color: var(--ink); cursor: pointer; text-align: left; }
+    .attachment-simulation:hover { border-color: #a8c7fa; background: #f8fbff; }
+    .attachment-icon { width: 38px; height: 42px; display: grid; flex: none; place-items: center; border-radius: 5px; background: #fce8e6; color: #b3261e; font-size: 11px; font-weight: 800; }
+    .attachment-copy { min-width: 0; display: grid; gap: 5px; overflow-wrap: anywhere; }
+    .attachment-copy small { color: var(--muted); font-size: 12px; line-height: 1.4; }
+    .attachment-debrief { margin: 16px 0 20px; padding: 16px; border: 1px solid #f1c4c1; border-radius: 9px; background: #fce8e6; color: #3c4043; font-size: 14px; line-height: 1.6; }
+    .attachment-debrief h2 { margin: 0 0 8px; color: #8c1d18; font-size: 17px; }
+    .attachment-debrief p { margin: 0; }
+
     @media (max-width: 900px) {
       .app-header { grid-template-columns: 180px minmax(150px, 1fr) auto; gap: 14px; padding: 0 14px; }
       .app-layout { grid-template-columns: 190px minmax(0, 1fr); }
@@ -652,6 +700,15 @@
         <button class="scenario-start" type="button" data-scenario="work">Découvrir le scénario <span aria-hidden="true">→</span></button>
       </article>
     </section>
+    <section class="accessibility-panel" aria-label="Options d’accessibilité">
+      <button class="accessibility-toggle" id="accessibility-toggle" type="button" aria-expanded="false" aria-controls="accessibility-options">Options d’accessibilité</button>
+      <div class="accessibility-options" id="accessibility-options" hidden>
+        <button class="accessibility-option" id="large-text-toggle" type="button" aria-pressed="false">Agrandir le texte</button>
+        <button class="accessibility-option" id="contrast-toggle" type="button" aria-pressed="false">Fort contraste</button>
+        <button class="accessibility-option" id="read-instructions" type="button" aria-pressed="false">Lire les consignes</button>
+      </div>
+      <p class="accessibility-status" id="accessibility-status" role="status" aria-live="polite"></p>
+    </section>
     <section class="stats-panel" aria-labelledby="stats-title">
       <header class="stats-header">
         <div>
@@ -671,6 +728,7 @@
         </div>
       </div>
       <p class="stats-storage-note" id="audience-status" role="status" aria-live="polite">Chargement de la fréquentation…</p>
+      <p class="stats-storage-note" id="stats-impact" role="status" aria-live="polite">Chaque choix alimentera les compteurs agrégés de l’atelier.</p>
       <div class="chart-legend" aria-label="Légende du graphique">
         <span class="legend-item"><span class="legend-swatch"></span>Ouvrir le lien</span>
         <span class="legend-item"><span class="legend-swatch deleted"></span>Supprimer le message</span>
@@ -727,5 +785,6 @@
   <div id="toast-region" aria-live="polite"></div>
 
   <script src="script.js"></script>
+  <script src="enhancements.js"></script>
 </body>
 </html>
