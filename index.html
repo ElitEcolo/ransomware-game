@@ -564,8 +564,11 @@
       .row-preview { display: none; }
       .detail { padding: 0 14px 20px; }
       .detail-subject { margin: 20px 0 16px; font-size: 19px; }
-      .sender-line { gap: 10px; }
-      .sender-date { width: 100%; margin: 4px 0 0; }
+      .sender-line { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 4px 10px; }
+      .sender-avatar { grid-column: 1; grid-row: 1 / span 2; align-self: start; }
+      .sender-info, .sender-date { grid-column: 2; }
+      .sender-address { display: block; overflow-wrap: anywhere; }
+      .sender-date { width: auto; margin: 0; }
       .detail-body { margin-left: 0; }
       .detail-body { margin-top: 22px; }
       .coach-message { margin: 14px; padding: 0 14px 20px; }
