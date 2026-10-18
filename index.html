@@ -647,7 +647,6 @@
       background: #fff4a3aa;
       box-shadow: 0 0 0 100vmax #0004;
       pointer-events: none;
-      touch-action: none;
     }
     .speech-button { min-width: 40px; min-height: 40px; margin: 2px 0 6px 8px; padding: 6px 10px; border: 1px solid #c4c7cc; border-radius: 999px; background: #fff; color: #174ea6; cursor: pointer; font-size: 14px; vertical-align: middle; }
     .speech-button:hover { background: #eef4fd; }
@@ -906,9 +905,10 @@
           <button class="accessibility-option" type="button" data-a11y-toggle="easyRead" aria-pressed="false" aria-describedby="falc-help">Aide de lecture simplifiée</button>
           <button class="accessibility-option" type="button" data-a11y-toggle="dyslexia" aria-pressed="false">Police OpenDyslexic</button>
           <button class="accessibility-option" type="button" data-a11y-toggle="spacing" aria-pressed="false">Aération du texte</button>
-          <button class="accessibility-option" type="button" data-a11y-toggle="ruler" aria-pressed="false">Règle de lecture</button>
+          <button class="accessibility-option" type="button" data-a11y-toggle="ruler" aria-pressed="false" aria-describedby="ruler-help">Règle de lecture</button>
         </div>
         <p class="fal-help" id="falc-help">Aide de lecture simplifiée : certains textes sont présentés en points courts. Cette aide n’est pas une version FALC certifiée ni validée avec des personnes concernées.</p>
+        <p class="fal-help" id="ruler-help">Ordinateur : déplace la souris. Téléphone ou tablette : touche l’écran pour placer la règle, puis fais glisser ton doigt pour la déplacer. La page reste défilable.</p>
       </fieldset>
       <fieldset class="accessibility-group">
         <legend>Affichage</legend>

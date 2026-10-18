@@ -478,17 +478,23 @@
     });
   }
 
+  const positionReadingRuler = (clientY) => {
+    const rulerHeight = readingRuler.getBoundingClientRect().height || 44;
+    const top = Math.min(Math.max(0, clientY - rulerHeight / 2), Math.max(0, window.innerHeight - rulerHeight));
+    readingRuler.style.top = `${top}px`;
+  };
+  document.addEventListener("pointerdown", (event) => {
+    if (!preferences.ruler) return;
+    positionReadingRuler(event.clientY);
+  });
   document.addEventListener("pointermove", (event) => {
     if (!preferences.ruler) return;
-    readingRuler.style.top = `${Math.max(0, event.clientY - 22)}px`;
+    positionReadingRuler(event.clientY);
   });
   document.addEventListener("focusin", (event) => {
     if (!preferences.ruler) return;
     const bounds = event.target.getBoundingClientRect();
     readingRuler.style.top = `${Math.max(0, bounds.top + (bounds.height - readingRuler.offsetHeight) / 2)}px`;
-  });
-  document.addEventListener("pointerleave", (event) => {
-    if (event.pointerType === "mouse" && preferences.ruler) readingRuler.style.top = "-50px";
   });
   applyPreferences();
 
